@@ -24,8 +24,6 @@ import {
   Check,
   Wallet,
   LayoutDashboard,
-  Smartphone,
-  Monitor,
 } from 'lucide-react';
 import { useCartStore, useAppStore, formatNT } from './store';
 import { COMPANY_INFO, Product } from './data';
@@ -123,17 +121,6 @@ export function StoreLayout() {
   const logout = useAppStore((s) => s.logout);
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [headerQuery, setHeaderQuery] = useState(searchParams.get('q') || '');
-  const isInsideFrame = typeof window !== 'undefined' && window.self !== window.top;
-  const [mobileSimulator, setMobileSimulator] = useState(
-    () => !isInsideFrame && searchParams.get('view') === 'mobile'
-  );
-  const [simUrl, setSimUrl] = useState(pathname || '/');
-
-  useEffect(() => {
-    if (!isInsideFrame && searchParams.get('view') === 'mobile') {
-      setMobileSimulator(true);
-    }
-  }, [searchParams, isInsideFrame]);
 
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', 'navy');
@@ -143,7 +130,6 @@ export function StoreLayout() {
   useEffect(() => {
     window.scrollTo(0, 0);
     setDrawerOpen(false);
-    setSimUrl(pathname || '/');
   }, [pathname]);
 
   const handleDesktopSearch = (e: React.FormEvent) => {
@@ -158,77 +144,6 @@ export function StoreLayout() {
   // Hide mobile bottom nav on product detail, cart, and checkout where sticky action bars live
   const isDetailOrCheckout =
     pathname.startsWith('/products/') || pathname === '/cart' || pathname === '/checkout';
-
-  if (mobileSimulator && !isInsideFrame) {
-    return (
-      <div className="min-h-screen bg-[#0c1a2e] text-white flex flex-col">
-        {/* Top Control Bar */}
-        <div className="h-14 px-6 border-b border-white/12 flex items-center justify-between gap-4">
-          <div className="flex items-center gap-3">
-            <span className="en w-8 h-8 rounded-lg bg-white text-ink grid place-items-center font-extrabold text-xs">
-              XX
-            </span>
-            <span className="font-extrabold text-sm">
-              {COMPANY_INFO.brandShort} — 手機版 App 互動預覽模式 (390 × 844)
-            </span>
-          </div>
-
-          <div className="hidden lg:flex items-center gap-2">
-            <span className="text-xs text-white/65 mr-1">快速跳轉手機頁面：</span>
-            {[
-              { path: '/', label: '手機首頁' },
-              { path: '/products/18', label: '商品詳情 (底部結帳列)' },
-              { path: '/cart', label: '手機購物車' },
-              { path: '/checkout', label: 'ATM 結帳頁' },
-              { path: '/order/XX2611080942', label: '領取序號卡匣' },
-              { path: '/member', label: '我的序號錢包' },
-            ].map((p) => (
-              <button
-                key={p.path}
-                type="button"
-                onClick={() => setSimUrl(p.path)}
-                className={`h-8 px-3 rounded-full text-xs font-bold transition-colors cursor-pointer ${
-                  simUrl === p.path
-                    ? 'bg-white text-ink'
-                    : 'bg-white/10 text-white hover:bg-white/20'
-                }`}
-              >
-                {p.label}
-              </button>
-            ))}
-          </div>
-
-          <button
-            type="button"
-            onClick={() => {
-              setMobileSimulator(false);
-              if (searchParams.get('view') === 'mobile') {
-                navigate(pathname);
-              }
-            }}
-            className="h-9 px-4 rounded-full bg-white text-ink text-xs font-extrabold inline-flex items-center gap-1.5 cursor-pointer hover:bg-zinc-200"
-          >
-            <Monitor size={14} />
-            <span>返回桌面寬版</span>
-          </button>
-        </div>
-
-        {/* Centered iPhone 15 Pro Frame */}
-        <div className="flex-1 py-6 px-4 flex items-center justify-center">
-          <div className="w-[414px] h-[868px] rounded-[48px] bg-[#1a2940] p-3 shadow-[0_28px_80px_rgba(0,0,0,0.55)] border border-white/15 relative flex flex-col">
-            <div className="w-full h-full rounded-[38px] overflow-hidden bg-white">
-              <iframe
-                key={simUrl}
-                src={simUrl}
-                title="XX科技 手機版 App 預覽"
-                className="w-full h-full border-0"
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  }
 
   return (
     <div className="min-h-screen flex flex-col bg-bg text-ink">
@@ -328,19 +243,6 @@ export function StoreLayout() {
                 className="bg-transparent text-sm px-2 w-full outline-none"
               />
             </form>
-
-            {/* Desktop 1-Click Mobile App Preview Button */}
-            {!isInsideFrame && (
-              <button
-                type="button"
-                onClick={() => setMobileSimulator(true)}
-                className="hidden md:inline-flex items-center gap-1.5 h-10 px-3.5 rounded-full bg-well hover:bg-well-strong text-ink text-xs font-extrabold transition-colors cursor-pointer"
-                title="切換為手機 App 視角預覽"
-              >
-                <Smartphone size={15} strokeWidth={2} />
-                <span>手機版預覽</span>
-              </button>
-            )}
 
             {/* Desktop Styla Wallet Pill */}
             <Link
