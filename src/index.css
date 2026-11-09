@@ -1,0 +1,188 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Archivo", "Noto Sans TC", system-ui, -apple-system, sans-serif;
+  --font-display: "Archivo", "Noto Sans TC", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+
+  --color-bg: #ffffff;
+  --color-well: #f2f5fa;
+  --color-well-strong: #e5ebf4;
+  --color-ink: #132a4a;
+  --color-ink-soft: #1e3f6e;
+  --color-muted: #52627a;
+  --color-line: #e1e7f0;
+  --color-sale: #d92638;
+  --color-sale-bg: #fef2f3;
+  --color-ok: #13794b;
+  --color-ok-bg: #eefbf3;
+}
+
+/* 1. 午夜藏青藍 (Midnight Navy - Default) */
+:root,
+html[data-theme="navy"] {
+  --color-bg: #ffffff;
+  --color-well: #f2f5fa;
+  --color-well-strong: #e5ebf4;
+  --color-ink: #132a4a;
+  --color-ink-soft: #1e3f6e;
+  --color-muted: #52627a;
+  --color-line: #e1e7f0;
+}
+
+/* 2. 北歐松石深綠 (Nordic Pine / Deep Emerald) */
+html[data-theme="emerald"] {
+  --color-bg: #fcfbf9;
+  --color-well: #eff5f2;
+  --color-well-strong: #e2ede8;
+  --color-ink: #123b30;
+  --color-ink-soft: #1b5445;
+  --color-muted: #4f685f;
+  --color-line: #dce6e1;
+}
+
+/* 3. 鈦金屬灰藍 (Titanium Slate) */
+html[data-theme="slate"] {
+  --color-bg: #ffffff;
+  --color-well: #f3f5f8;
+  --color-well-strong: #e6eaf0;
+  --color-ink: #2b3545;
+  --color-ink-soft: #3c4a60;
+  --color-muted: #5e6b7d;
+  --color-line: #e2e7ee;
+}
+
+/* 4. 深焙可可與燕麥奶白 (Espresso & Cashmere) */
+html[data-theme="espresso"] {
+  --color-bg: #fdfcfb;
+  --color-well: #f5f1ec;
+  --color-well-strong: #ebe4dc;
+  --color-ink: #2e221d;
+  --color-ink-soft: #46342d;
+  --color-muted: #6e5d55;
+  --color-line: #e6dfd7;
+}
+
+/* 5. 經典碳黑 (Original Styla Carbon Black) */
+html[data-theme="black"] {
+  --color-bg: #ffffff;
+  --color-well: #f5f5f7;
+  --color-well-strong: #ececf0;
+  --color-ink: #141414;
+  --color-ink-soft: #27272a;
+  --color-muted: #595963;
+  --color-line: #e6e6eb;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    background-color: var(--color-bg);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    caret-color: var(--color-ink);
+    text-underline-offset: 4px;
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+
+  body {
+    background-color: var(--color-bg);
+    color: var(--color-ink);
+    line-height: 1.55;
+    overflow-x: hidden;
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+
+  ::selection {
+    background-color: var(--color-ink);
+    color: #ffffff;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-ink);
+    outline-offset: 2px;
+  }
+
+  input::placeholder,
+  textarea::placeholder {
+    color: var(--color-muted);
+    opacity: 0.85;
+  }
+}
+
+/* Custom themed scrollbars */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #c8c8d0 transparent;
+}
+
+*::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #c8c8d0;
+  border-radius: 9999px;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background-color: #8e8e99;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.en {
+  font-family: var(--font-display);
+  font-variant-numeric: tabular-nums;
+}
+
+.mono {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+.num {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Authored single signature transition for serial pass reveal */
+@keyframes passReveal {
+  0% {
+    opacity: 0;
+    transform: translateY(10px) scale(0.985);
+    filter: blur(4px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+.pass-reveal {
+  animation: passReveal 0.42s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
