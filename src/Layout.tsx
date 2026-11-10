@@ -28,7 +28,7 @@ import {
 import { useCartStore, useAppStore, formatNT } from './store';
 import { COMPANY_INFO, Product } from './data';
 
-export function StylaProductCard({ p }: { p: Product }) {
+export function ProductCard({ p }: { p: Product }) {
   const add = useCartStore((s) => s.add);
   const lastAddedId = useCartStore((s) => s.lastAddedId);
   const isJustAdded = lastAddedId === p.id;
@@ -150,7 +150,7 @@ export function StoreLayout() {
       {/* Desktop & Mobile Header */}
       <header className="sticky top-0 z-40 bg-bg/95 backdrop-blur-md border-b border-line">
         <div className="max-w-[1240px] mx-auto px-4 md:px-6 h-[64px] md:h-[72px] flex items-center justify-between gap-3">
-          {/* Mobile Left: Hamburger + Styla Wallet Pill */}
+          {/* Mobile Left: Hamburger + Wallet Pill */}
           <div className="flex md:hidden items-center gap-2.5">
             <button
               type="button"
@@ -244,7 +244,7 @@ export function StoreLayout() {
               />
             </form>
 
-            {/* Desktop Styla Wallet Pill */}
+            {/* Desktop Wallet Pill */}
             <Link
               to={user ? '/member' : '/login'}
               className="hidden md:inline-flex items-center gap-2 h-10 px-4 rounded-full bg-ink text-white text-xs font-bold tracking-tight hover:bg-ink-soft transition-colors"
@@ -540,7 +540,7 @@ export function StoreLayout() {
         </div>
       </footer>
 
-      {/* Mobile Styla 4-Tab Sticky Bottom Navigation Bar */}
+      {/* Mobile 4-Tab Sticky Bottom Navigation Bar */}
       {!isDetailOrCheckout && (
         <nav
           aria-label="行動版底部導覽"

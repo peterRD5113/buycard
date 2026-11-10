@@ -63,7 +63,7 @@ html[data-theme="espresso"] {
   --color-line: #e6dfd7;
 }
 
-/* 5. 經典碳黑 (Original Styla Carbon Black) */
+/* 5. 經典碳黑 (Carbon Black) */
 html[data-theme="black"] {
   --color-bg: #ffffff;
   --color-well: #f5f5f7;

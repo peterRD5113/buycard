@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+﻿import React, { useState, useMemo } from 'react';
 import {
   BrowserRouter,
   Routes,
@@ -34,7 +34,7 @@ import {
   Send,
   X,
 } from 'lucide-react';
-import { StoreLayout, StylaProductCard } from './Layout';
+import { StoreLayout, ProductCard } from './Layout';
 import { useCartStore, useAppStore, formatNT } from './store';
 import {
   TAIWAN_BANKS,
@@ -45,7 +45,7 @@ import {
 } from './data';
 
 /* ============================================================================
-   1. HOME PAGE (/) — Styla Mobile E-Commerce Flow + Desktop Editorial Store
+   1. HOME PAGE (/) — Mobile E-Commerce Flow + Desktop Editorial Store
    ============================================================================ */
 const QUICK_DENOMINATIONS = [
   { id: 9, label: '90點', price: 86, img: '/images/products/mycard-90.webp' },
@@ -92,7 +92,7 @@ function HomePage() {
 
   return (
     <div>
-      {/* Mobile-First Search Bar (matches Styla screen 1) */}
+      {/* Mobile-First Search Bar (matches screen 1) */}
       <div className="md:hidden max-w-[1240px] mx-auto px-4 pt-3">
         <form
           onSubmit={handleMobileSearchSubmit}
@@ -116,7 +116,7 @@ function HomePage() {
         </form>
       </div>
 
-      {/* Horizontal Filter Pills (Styla Screen 1 Tabs) */}
+      {/* Horizontal Filter Pills (Screen 1 Tabs) */}
       <div className="max-w-[1240px] mx-auto px-4 md:px-6 pt-3 md:pt-7">
         <div className="flex items-center justify-between gap-4">
           <div className="flex items-center gap-2 overflow-x-auto no-scrollbar py-1">
@@ -154,7 +154,7 @@ function HomePage() {
         </div>
       </div>
 
-      {/* Styla Rounded Midnight Navy Editorial Promo Banner */}
+      {/* Rounded Midnight Navy Editorial Promo Banner */}
       <section className="max-w-[1240px] mx-auto px-4 md:px-6 pt-4 md:pt-5">
         <div className="rounded-[24px] bg-ink text-white grid grid-cols-1 lg:grid-cols-[1.08fr_0.92fr] items-center overflow-hidden">
           <div className="p-6 sm:p-8 md:p-11">
@@ -227,7 +227,7 @@ function HomePage() {
         </div>
       </section>
 
-      {/* Styla Circular Quick-Denomination Avatars Row */}
+      {/* Circular Quick-Denomination Avatars Row */}
       <section className="max-w-[1240px] mx-auto px-4 md:px-6 pt-8">
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-base md:text-lg font-extrabold tracking-tight">
@@ -282,7 +282,7 @@ function HomePage() {
 
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
           {filteredProducts.map((p) => (
-            <StylaProductCard key={p.id} p={p} />
+            <ProductCard key={p.id} p={p} />
           ))}
         </div>
 
@@ -297,7 +297,7 @@ function HomePage() {
         </div>
       </section>
 
-      {/* Styla Bento Specification Matrix (Inspired by Styla preview_5.jpg) */}
+      {/* Bento Specification Matrix (Inspired by preview_5.jpg) */}
       <section className="max-w-[1240px] mx-auto px-4 md:px-6 pt-14">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div className="rounded-[22px] bg-ink text-white p-7 flex flex-col justify-between min-h-[210px]">
@@ -536,7 +536,7 @@ function ProductsPage() {
         </div>
       </div>
 
-      {/* Styla Filter Pills */}
+      {/* Filter Pills */}
       <div className="flex items-center gap-2 overflow-x-auto no-scrollbar py-4">
         {[
           { id: 'all', label: `全部 (${products.length})` },
@@ -581,7 +581,7 @@ function ProductsPage() {
       ) : (
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6 pt-2">
           {filtered.map((p) => (
-            <StylaProductCard key={p.id} p={p} />
+            <ProductCard key={p.id} p={p} />
           ))}
         </div>
       )}
@@ -590,7 +590,7 @@ function ProductsPage() {
 }
 
 /* ============================================================================
-   3. PRODUCT DETAIL PAGE (/products/:id) — Styla Screen 2 Sheet + Size Selector
+   3. PRODUCT DETAIL PAGE (/products/:id) — Screen 2 Sheet + Size Selector
    ============================================================================ */
 function ProductDetailPage() {
   const { id } = useParams();
@@ -623,7 +623,7 @@ function ProductDetailPage() {
 
   return (
     <div className="max-w-[1240px] mx-auto px-4 md:px-6 pt-4 md:pt-8">
-      {/* Top Bar: Back + Share (Matches Styla Screen 2 Header) */}
+      {/* Top Bar: Back + Share (Matches Screen 2 Header) */}
       <div className="flex items-center justify-between mb-4 md:mb-6">
         <button
           type="button"
@@ -654,7 +654,7 @@ function ProductDetailPage() {
 
       {/* Main 2-Column Layout (Mobile Top Well + Bottom Sheet Card) */}
       <div className="grid grid-cols-1 lg:grid-cols-[0.95fr_1.05fr] gap-6 md:gap-10 items-start">
-        {/* Left: Styla Soft Gray Artwork Stage */}
+        {/* Left: Soft Gray Artwork Stage */}
         <div className="rounded-[26px] bg-well p-8 md:p-12 flex flex-col items-center justify-center relative">
           <div className="w-full flex items-center justify-between mb-4">
             <span className="px-3 py-1 rounded-full bg-ink text-white text-xs font-bold">
@@ -677,7 +677,7 @@ function ProductDetailPage() {
           </div>
         </div>
 
-        {/* Right: Styla Product Info & Denomination Selector Matrix */}
+        {/* Right: Product Info & Denomination Selector Matrix */}
         <div className="bg-white rounded-[26px] md:border md:border-line md:p-8">
           <div className="flex items-start justify-between gap-4">
             <div>
@@ -708,7 +708,7 @@ function ProductDetailPage() {
             </span>
           </div>
 
-          {/* Styla Square Size/Denomination Selector ("切換點數面額") */}
+          {/* Square Size/Denomination Selector ("切換點數面額") */}
           <div className="mt-6">
             <div className="flex items-center justify-between mb-2.5">
               <span className="text-xs font-extrabold text-ink">
@@ -890,7 +890,7 @@ function ProductDetailPage() {
         </div>
       </div>
 
-      {/* Mobile Sticky Bottom Action Bar (Exact Styla Screen 2 Pattern) */}
+      {/* Mobile Sticky Bottom Action Bar (Exact Screen 2 Pattern) */}
       <div className="md:hidden fixed bottom-0 inset-x-0 z-40 bg-white/95 backdrop-blur-md border-t border-line px-4 py-3 flex items-center justify-between gap-4">
         <div>
           <div className="text-[11px] text-muted">應付總計 ({qty} 張)</div>
@@ -923,7 +923,7 @@ function ProductDetailPage() {
 }
 
 /* ============================================================================
-   4. CART PAGE (/cart) — Styla Screen 3 Borderless Cart + Summary Sheet
+   4. CART PAGE (/cart) — Screen 3 Borderless Cart + Summary Sheet
    ============================================================================ */
 function CartPage() {
   const navigate = useNavigate();
@@ -986,7 +986,7 @@ function CartPage() {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-[1.35fr_0.85fr] gap-8 pt-6 items-start">
-        {/* Left: Styla Cart Item List */}
+        {/* Left: Cart Item List */}
         <div className="space-y-3">
           {items.map((item) => (
             <div
@@ -1025,7 +1025,7 @@ function CartPage() {
                 </div>
               </div>
 
-              {/* Right: Styla Gray Pill Stepper */}
+              {/* Right: Gray Pill Stepper */}
               <div className="flex flex-col items-end gap-2">
                 <button
                   type="button"
@@ -1062,7 +1062,7 @@ function CartPage() {
           ))}
         </div>
 
-        {/* Right: Styla Order Summary Card */}
+        {/* Right: Order Summary Card */}
         <div className="rounded-[24px] border border-line bg-white p-6 space-y-4">
           <h2 className="font-extrabold text-base">訂單金額明細</h2>
 
@@ -1321,7 +1321,7 @@ function CheckoutPage() {
             </div>
           </div>
 
-          {/* Section 2: ATM Virtual Account Bank Verification (baohepoint core flow) */}
+          {/* Section 2: ATM Virtual Account Bank Verification */}
           <div className="rounded-[22px] border border-line bg-white p-6 space-y-4">
             <div className="flex items-center justify-between">
               <h2 className="font-extrabold text-base">
@@ -1611,7 +1611,7 @@ function OrderPage() {
         </div>
       )}
 
-      {/* Issued Serial Code Cards (Styla Tactile Pass) */}
+      {/* Issued Serial Code Cards (Tactile Pass) */}
       {isCompleted && (
         <div className="space-y-4 mb-8 pass-reveal">
           <h2 className="font-extrabold text-base">已核發之 MyCard 卡號與密碼</h2>
